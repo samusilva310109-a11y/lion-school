@@ -1,0 +1,102 @@
+
+
+header{
+    background-color: var(--details-color);
+    display: flex;
+    padding: 15px;
+    padding-inline: 96px;
+    justify-content:space-between
+}
+
+header > img {
+    width: 100px;
+    height: 100px;
+}
+
+#logo-icon > img{
+    width: 150px;
+}
+
+.voltar-sair{
+    background-color: var(--details-color);
+    display: flex;
+    align-items: center;
+    padding: 0.5em;
+    gap: 10px;
+}
+
+.voltar-sair > span{
+    font-size: 2rem;
+    color: #ffff;
+}
+
+.main-principal{
+    display: grid;
+    grid-template-columns: 1fr 0.5fr;
+    align-self: center;
+    justify-self: center;
+    margin: 200px 100px;
+    gap: 100px;
+}
+
+/* container principal */
+
+.container{
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.devices-container{
+    display: grid;
+    gap: 50px;
+    color: #353535;
+}
+
+.devices-container > h1{
+    font-size: 4em;
+    font-family: 'Roboto';
+    font-weight: 250;
+}
+
+.devices-container > h1 > span{
+    color: var(--details-color);
+    font-weight: bold;
+}
+
+/* container de cursos */
+
+.cursos-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    height: 100%;
+}
+
+.curso{
+    background-color: var(--details-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25em;
+    padding: 4em 5em;
+    gap: 20px;
+    box-shadow: 10px 10px 5px #99A3D8;
+}
+
+.curso > span{
+    font-size: 3em;
+    font-weight: bold;
+    color: #ffff; 
+}
+
+/* footer */
+
+footer{
+    background-color: var(--details-color);
+    max-height: 100%;
+}
