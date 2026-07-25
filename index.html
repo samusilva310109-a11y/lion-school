@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lion School</title>
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/principal.css">
-    <link rel="stylesheet" href="./css/tela-cursos.css">
+    <link rel="stylesheet" href="./css/tela_turma.css">
+    <script type="module" src="./js/app.js" defer></script>
 </head>
+
 <body>
     <header>
         <div id="logo-icon">
             <img src="./img/logo.svg" id="logo" alt="logo-lion-school">
         </div>
-        
+
 
         <button class="voltar-sair">
             <img src="./img/exit-icon.svg" alt="exit-icon">
@@ -21,32 +24,12 @@
         </button>
     </header>
 
-    <main class="main-principal">
-        <div class="container">
-
-            <div class="devices-container">
-                <h1>Escolha um <span>curso</span> <br>para gerenciar</h1>
-                <img src="./img/devices.svg" alt="devices-image">
-            </div>
-
-            <div class="studant-container">
-                <img src="./img/studant.svg" alt="">
-            </div>
-        
-        </div>
-
-        <div class="cursos-container">
-
-            <button class="curso">
-                <img src="./img/dev-icon.svg" alt="">
-                <span>DS</span>
-            </button>
-            <button class="curso">
-                <img src="./img/networks-icon.svg" alt="">
-                <span>REDES</span>
-            </button>
-
-        </div>
+    <main id="main">
+        <!-- <div class="filtros" style="display: flex;">
+            <span>Legenda</span>
+            <div style="width: 20px; height: 20px; background-color: #3347B0;" id="quadrado1"></div>
+            <div style="width: 20px; height: 20px; background-color: #E5B657;" id="quadrado2"></div>
+        </div> -->
     </main>
 
     <footer>
@@ -54,9 +37,21 @@
             <ul>
                 <li><img src="./img/phone-icon.svg" alt=""><span>(11) 4774-4700</span></li>
                 <li><img src="./img/icon-email.svg" alt=""><span>lionschool@gmail.com</span></li>
-                <li><img src="./img/locatition-icon.svg" alt=""><span>Rua tcc, 211,  Centro, Jandira</span></li>
-            </ul>  
+                <li><img src="./img/locatition-icon.svg" alt=""><span>Rua tcc, 211, Centro, Jandira</span></li>
+            </ul>
+        </div>
+
+        <div class="copright-container">
+            <span>Copyright © 2026 | Samuel Silva</span>
+        </div>
+
+        <div class="social-media-container">
+            <img src="./img/youtube-icon.svg" alt="">
+            <img src="./img/twitter-icon.svg" alt="">
+            <img src="./img/instagram-icon.svg" alt="">
+            <img src="./img/facebook-icon.svg" alt="">
         </div>
     </footer>
 </body>
+
 </html>

@@ -74,7 +74,6 @@ header > img {
     align-items: center;
     justify-content: center;
     gap: 50px;
-    height: 100%;
 }
 
 .curso{
@@ -94,9 +93,40 @@ header > img {
     color: #ffff; 
 }
 
+.curso > img{
+    max-width: 5em;
+    filter: brightness(0) invert(1);
+}
+
+
 /* footer */
 
 footer{
     background-color: var(--details-color);
-    max-height: 100%;
+    min-height: 100%;
+    color: #ffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 100px;
+}
+
+.contact-container{
+    margin-top: 20px;
+}
+
+.contact-container > ul {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-container > ul > li {
+    display: flex;
+    gap: 20px
+}
+
+.social-media-container{
+    display: flex;
+    gap: 20px;
 }
