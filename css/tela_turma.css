@@ -1,7 +1,127 @@
-.filtros{
+
+/* seção de legendas */
+
+.filtros-container{
     width: 100%;
     display: flex;
     background-color: #BCC2E5;
+    color: var(--details-color);
     padding: 10px;
+    padding-inline: 50px;
+    justify-content:space-between;
+    font-weight: 500;
+}
+
+.quadrado{
+    box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.2);
+}
+
+#quadrado1{
+    background-color: #3347B0;
+}
+
+#quadrado2{
+    background-color: #E5B657;
+}
+
+.legenda{
+    display: inherit;
+    gap: 10px;
+}
+
+.filtro{
+    position: relative;
+}
+
+.filtro > button{
+    cursor: pointer;
+    background-color: #BCC2E5;
+    color: var(--details-color);
+    font-weight: 700;
+    font-size: 15px;
+    
+}
+
+.filter-options{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--details-color);
+    color: #fff;
+    padding:10px;
+    padding-inline: 30px;
+    gap: 10px;
+}
+
+.filter-options .opcao-item{
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.filter-options .opcao-item:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.filter-options.aberto {
+    display: flex;
+}
+
+
+/* lista da turma */
+
+
+.principal{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#titulo{
+   color: var(--details-color);
+   margin-top: 50px; 
+   font-size: 3rem;
+   font-weight: 600;
+}
+
+.cards-container{
+    display: flex;
+    margin: 50px 200px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-wrap: wrap;
+    gap: 50px;
+    padding: 20px;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 300px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.5);
+    gap: 20px;
+    box-shadow: 10px 10px 5px #99A3D8;
+    background-color: var(--cursando-color);
+}
+
+.card > img{
+    width: 200px;
+}
+
+.finalizado{
+    background-color: #3347B0;
+}
+
+.cursando{
+    background-color: #E5B657;
 }
 

@@ -1,4 +1,4 @@
-import {getCursos} from './rotas.js'
+import {getCursos, getAlunosPorCurso} from './rotas.js'
 import { criarBotoesCursos, criarCursoContainer, criarContainer } from './principal.js'
 
 const main = document.getElementById("main")
@@ -27,5 +27,3 @@ async function carregarTelaHome() {
 async function carregarTelaTurma(idCurso) {
     
 }
-
-carregarTelaHome()

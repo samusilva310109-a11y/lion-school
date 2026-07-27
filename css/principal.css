@@ -103,7 +103,7 @@ header > img {
 
 footer{
     background-color: var(--details-color);
-    min-height: 100%;
+    max-height: 190px;
     color: #ffff;
     display: flex;
     align-items: center;

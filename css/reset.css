@@ -12,14 +12,17 @@ ul, li {
 
 :root{
     --primary-color:#ffff;
-    --details-color: #3347B0
+    --details-color: #3347B0;
+    --cursando-color: #3347B0;
+    --finalizado-color: #E5B657;
 }
 
 body{
     display: grid;
-    grid-template-rows: 0.1fr 1fr 1fr;
-    max-height: calc(100dvh + 90px);
+    grid-template-rows: auto 1fr auto;
+    min-height: calc(100dvh + 90px);
     max-width: 100dvw;
+    font-family: 'Roboto', sans-serif;
 }
 
 button{
