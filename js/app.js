@@ -8,6 +8,33 @@ const buttonVoltar = document.getElementById("button-header")
 
 let mudandoDeTela = false
 
+async function filtrarAlunos(statusSelecionado, idCurso) {
+    let alunos;
+
+    console.log(statusSelecionado);
+    
+
+    if (statusSelecionado == "todos") {
+        alunos = await getAlunosPorCurso(idCurso)
+    }else{
+        alunos = await filtrarAlunosPorStatus(statusSelecionado, idCurso)
+    }
+
+    const cards = alunos.map(aluno => {
+        const card = criarCard(aluno)
+        card.addEventListener('click', () => carregarInfoAluno(aluno.id))
+        
+        return card
+    })
+
+    const novoCardsContainer = criarCardsContainer(cards)
+    const cardsContainerAtual = document.querySelector('.cards-container')
+
+    if (cardsContainerAtual) {
+        cardsContainerAtual.replaceWith(novoCardsContainer)
+    }
+}
+
 async function carregarTelaHome() {
 
     if (mudandoDeTela)
@@ -36,7 +63,7 @@ async function carregarTelaHome() {
         main.append(container, cursoContainer)
     } catch (error) {
         console.error("Erro ao carregar tela: " + error)
-    }finally{
+    } finally {
         mudandoDeTela = false
     }
 
@@ -53,30 +80,26 @@ async function carregarTelaTurma(curso) {
         carregarTelaHome()
         buttonVoltar.children[1].textContent = "Sair"
     }
-    
 
-    const alunos = await getAlunosPorCurso(curso.id)
-
-    const filtroContainer = criarFiltrosContainer()
+    let alunos = await getAlunosPorCurso(curso.id)
 
     const cards = alunos.map(aluno => {
-        
         const card = criarCard(aluno)
-
-
         card.addEventListener('click', () => carregarInfoAluno(aluno.id))
-
         return card
     })
 
-    const cardContainer = criarCardsContainer(cards)
-    const containerPrincipal = criarContainerPrincipal(curso, cardContainer)
+    const cardsContainer = criarCardsContainer(cards)
+    const filtroContainer = criarFiltrosContainer(filtrarAlunos, curso.id)
+    const containerPrincipal = criarContainerPrincipal(curso, cardsContainer)
 
     main.append(filtroContainer, containerPrincipal)
 }
 
 async function carregarInfoAluno(alunoId) {
-    
+
 }
+
+
 
 carregarTelaHome()

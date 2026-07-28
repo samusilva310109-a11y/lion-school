@@ -1,10 +1,6 @@
 'use strict'
 
-export function filtrarAlunos(statusSelecionado){
-    
-}
-
-function criarFiltro() {
+function criarFiltro(filtrarAlunos, idCurso) {
     const filtroDiv = document.createElement('div')
     filtroDiv.className = "filtro"
 
@@ -16,7 +12,7 @@ function criarFiltro() {
     filterOptionsDiv.className = "filter-options"
 
 
-    const opcoesFiltro = ['Status', 'Cursando', 'Finalizado']
+    const opcoesFiltro = ['Todos', 'Cursando', 'Finalizado']
 
     opcoesFiltro.forEach(opcaoText => {
 
@@ -27,12 +23,13 @@ function criarFiltro() {
         itemOpcao.dataset.value = opcaoText.toLowerCase()
 
         itemOpcao.addEventListener('click', (evento) => {
-            const statusSelecionado = evento.currentTarget.value
+            const statusSelecionado = evento.currentTarget.textContent.toLowerCase()
             buttonFilter.textContent = evento.currentTarget.textContent
 
 
             filterOptionsDiv.classList.remove('aberto')
 
+            filtrarAlunos(statusSelecionado, idCurso)
         })
 
         filterOptionsDiv.append(itemOpcao)
@@ -41,9 +38,6 @@ function criarFiltro() {
     buttonFilter.addEventListener('click', () => {
         filterOptionsDiv.classList.toggle('aberto')
     })
-
-    console.log(buttonFilter.textContent);
-    
 
     filtroDiv.append(buttonFilter, filterOptionsDiv)
 
@@ -75,11 +69,11 @@ function criarLegenda() {
     return divLegenda
 }
 
-export function criarFiltrosContainer() {
+export function criarFiltrosContainer(filtrarAlunos, idCurso) {
     const filtrosContainer = document.createElement('div')
     filtrosContainer.className = "filtros-container"
 
-    const filtro = criarFiltro()
+    const filtro = criarFiltro(filtrarAlunos, idCurso)
     const legenda = criarLegenda()
 
     filtrosContainer.append(filtro, legenda)

@@ -29,8 +29,8 @@ export async function getAlunosPorCurso(idCurso) {
     return response.json()
 }
 
-export async function filtrarAlunosPorStatus(status) {
-    const response = await fetch(`${url}/alunos?status=${status}`)
+export async function filtrarAlunosPorStatus(status, idCurso) {
+    const response = await fetch(`${url}/alunos?status=${status}&curso_id=${idCurso}`)
 
     if(!response.ok)
         throw new Error("Erro ao filtrar alunos por status")
