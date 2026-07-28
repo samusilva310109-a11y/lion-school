@@ -127,6 +127,3 @@ function telaCarregamento() {
     divLoadingContainer.append(imgLogoLoading, loading)
     return divLoadingContainer
 }
-
-
-carregarTelaHome()

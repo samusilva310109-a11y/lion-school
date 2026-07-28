@@ -1,0 +1,38 @@
+.info-container{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 300px;
+}
+
+.foto-aluno-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.graph-container{
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.graph-container, .foto-aluno-container{
+    display: flex;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.369);
+    height: 500px;
+    width: 500px;
+}
+
+.foto-aluno-container > img{
+    width: 400px;
+    height: 400px;
+}
+
+.div-bar{
+    height: 387px;
+    width: 2em;
+    background-color: gray;
+}
