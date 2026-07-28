@@ -4,6 +4,9 @@
 .filtros-container{
     width: 100%;
     display: flex;
+    position: sticky;
+    z-index: 100;
+    top: 112px;
     background-color: #BCC2E5;
     color: var(--details-color);
     padding: 10px;
@@ -82,7 +85,7 @@
     align-items: center;
 }
 
-#titulo{
+.principal > h1{
    color: var(--details-color);
    margin-top: 50px; 
    font-size: 3rem;
@@ -115,6 +118,7 @@
 }
 
 .card > img{
-    width: 200px;
+    width: 180px;
+    border-radius: 50%;
 }
 

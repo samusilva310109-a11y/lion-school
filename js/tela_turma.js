@@ -1,11 +1,16 @@
 'use strict'
 
+export function filtrarAlunos(statusSelecionado){
+    
+}
+
 function criarFiltro() {
     const filtroDiv = document.createElement('div')
     filtroDiv.className = "filtro"
 
     const buttonFilter = document.createElement('button')
     buttonFilter.textContent = "Status"
+    buttonFilter.id = "button-filter"
 
     const filterOptionsDiv = document.createElement('div')
     filterOptionsDiv.className = "filter-options"
@@ -22,9 +27,12 @@ function criarFiltro() {
         itemOpcao.dataset.value = opcaoText.toLowerCase()
 
         itemOpcao.addEventListener('click', (evento) => {
+            const statusSelecionado = evento.currentTarget.value
             buttonFilter.textContent = evento.currentTarget.textContent
 
+
             filterOptionsDiv.classList.remove('aberto')
+
         })
 
         filterOptionsDiv.append(itemOpcao)
@@ -33,6 +41,9 @@ function criarFiltro() {
     buttonFilter.addEventListener('click', () => {
         filterOptionsDiv.classList.toggle('aberto')
     })
+
+    console.log(buttonFilter.textContent);
+    
 
     filtroDiv.append(buttonFilter, filterOptionsDiv)
 
@@ -75,7 +86,7 @@ export function criarFiltrosContainer() {
     return filtrosContainer
 }
 
-export async function criarCards(aluno) {
+export function criarCard(aluno) {
     const card = document.createElement('div')
     card.classList = "card"
 
@@ -84,6 +95,8 @@ export async function criarCards(aluno) {
 
     const alunoName = document.createElement('span')
     alunoName.textContent = aluno.nome
+
+    card.append(imgAluno, alunoName)
 
     if (aluno.status.toLowerCase() == "cursando") 
         card.classList.add('cursando')
@@ -101,11 +114,12 @@ export function criarCardsContainer(cards){
     return cardsContainer
 }
 
-export async function criarContainerPrincipal(curso, cardsContainer) {
+export function criarContainerPrincipal(curso, cardsContainer) {
     const divPrincipal = document.createElement('div')
     divPrincipal.className = "principal"
 
     const titulo = document.createElement('h1')
+    titulo.className = ""
     titulo.textContent = curso.nome
 
     divPrincipal.append(titulo, cardsContainer)

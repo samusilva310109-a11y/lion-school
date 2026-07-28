@@ -1,51 +1,68 @@
-import {getCursos, getAlunosPorCurso} from './rotas.js'
+import { getCursos, getAlunosPorCurso, filtrarAlunosPorStatus } from './rotas.js'
 import { criarBotoesCursos, criarCursoContainer, criarContainer } from './principal.js'
-import { criarFiltrosContainer, criarCards, criarContainerPrincipal, criarCardsContainer } from './tela_turma.js'
+import { criarFiltrosContainer, criarCard, criarContainerPrincipal, criarCardsContainer } from './tela_turma.js'
 
 const main = document.getElementById("main")
 
 const buttonVoltar = document.getElementById("button-header")
 
+let mudandoDeTela = false
+
 async function carregarTelaHome() {
-    main.replaceChildren()
-    
-    main.className = "main-principal"
 
-    const cursos = await getCursos()
+    if (mudandoDeTela)
+        return
 
-    const botoes = cursos.map(curso => {
-        const btn = criarBotoesCursos(curso)
+    mudandoDeTela = true
 
-        btn.addEventListener('click', () => carregarTelaTurma(curso))
+    try {
 
-        return btn
-    })
+        main.replaceChildren()
 
-    const cursoContainer = criarCursoContainer(botoes)
-    const container = criarContainer()
-    main.append(container,cursoContainer)
+        main.className = "main-principal"
+
+        const cursos = await getCursos()
+
+        const botoes = cursos.map(curso => {
+            const btn = criarBotoesCursos(curso)
+
+            btn.addEventListener('click', () => carregarTelaTurma(curso))
+
+            return btn
+        })
+
+        const cursoContainer = criarCursoContainer(botoes)
+        const container = criarContainer()
+        main.append(container, cursoContainer)
+    } catch (error) {
+        console.error("Erro ao carregar tela: " + error)
+    }finally{
+        mudandoDeTela = false
+    }
+
 }
 
 async function carregarTelaTurma(curso) {
     main.replaceChildren()
     main.classList.remove("main-principal")
 
-    const buttonVoltar = document.getElementById("button-header")
+    const buttonVoltar = document.querySelector(".voltar-sair")
     buttonVoltar.children[1].textContent = "Voltar"
 
-    buttonVoltar.addEventListener('click', () => {
+    buttonVoltar.onclick = () => {
         carregarTelaHome()
         buttonVoltar.children[1].textContent = "Sair"
-        buttonVoltar.removeEventListener()
-    })
+    }
     
-    const alunos = await getAlunosPorCurso(curso.id)    
+
+    const alunos = await getAlunosPorCurso(curso.id)
 
     const filtroContainer = criarFiltrosContainer()
-    
+
     const cards = alunos.map(aluno => {
-        const card = await criarCards(aluno)
         
+        const card = criarCard(aluno)
+
 
         card.addEventListener('click', () => carregarInfoAluno(aluno.id))
 
@@ -56,6 +73,10 @@ async function carregarTelaTurma(curso) {
     const containerPrincipal = criarContainerPrincipal(curso, cardContainer)
 
     main.append(filtroContainer, containerPrincipal)
+}
+
+async function carregarInfoAluno(alunoId) {
+    
 }
 
 carregarTelaHome()
