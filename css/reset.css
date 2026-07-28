@@ -27,3 +27,56 @@ button{
     border: none;
     cursor: pointer;
 }
+
+.loading-container{
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    width: 200px;
+    max-height: 400px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.loading-container > img{
+    width: 90px;
+
+}
+
+
+.loading-container .loading{
+    position: relative;
+    width: 5rem;
+    height: 5rem;
+    top: 50px;
+    left: 15%;
+    margin:  -3.1rem 0 0 -3.1rem;
+    border-top: 3px solid var(--details-color);
+    border-radius: 50%;
+    animation: rotate 2s infinite linear;
+}
+
+.loading-container .loading::before{
+    position: absolute;
+    content: " ";
+    width: 5rem;
+    height: 5rem;
+    top: 55px;
+    left: 65%;
+    margin:  -3.1rem 0 0 -3.1rem;
+    border-top: 3px solid #E5B657;
+    border-radius: 50%;
+    animation: rotate 2s infinite linear;
+}
+
+@keyframes rotate {
+    from{
+        transform: rotate(0deg);
+    }to{
+        transform: rotate(360deg);
+    }
+}

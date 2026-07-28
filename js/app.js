@@ -11,19 +11,16 @@ let mudandoDeTela = false
 async function filtrarAlunos(statusSelecionado, idCurso) {
     let alunos;
 
-    console.log(statusSelecionado);
-    
-
     if (statusSelecionado == "todos") {
         alunos = await getAlunosPorCurso(idCurso)
-    }else{
+    } else {
         alunos = await filtrarAlunosPorStatus(statusSelecionado, idCurso)
     }
 
     const cards = alunos.map(aluno => {
         const card = criarCard(aluno)
         card.addEventListener('click', () => carregarInfoAluno(aluno.id))
-        
+
         return card
     })
 
@@ -42,13 +39,15 @@ async function carregarTelaHome() {
 
     mudandoDeTela = true
 
+    main.replaceChildren()
+    main.append(telaCarregamento())
+
     try {
+        const cursos = await getCursos()
 
         main.replaceChildren()
-
         main.className = "main-principal"
 
-        const cursos = await getCursos()
 
         const botoes = cursos.map(curso => {
             const btn = criarBotoesCursos(curso)
@@ -81,25 +80,53 @@ async function carregarTelaTurma(curso) {
         buttonVoltar.children[1].textContent = "Sair"
     }
 
-    let alunos = await getAlunosPorCurso(curso.id)
+    if (mudandoDeTela) {
+        return
+    }
 
-    const cards = alunos.map(aluno => {
-        const card = criarCard(aluno)
-        card.addEventListener('click', () => carregarInfoAluno(aluno.id))
-        return card
-    })
+    mudandoDeTela = true
+    main.replaceChildren()
+    main.append(telaCarregamento())
 
-    const cardsContainer = criarCardsContainer(cards)
-    const filtroContainer = criarFiltrosContainer(filtrarAlunos, curso.id)
-    const containerPrincipal = criarContainerPrincipal(curso, cardsContainer)
+    try {
+        let alunos = await getAlunosPorCurso(curso.id)
+        main.replaceChildren()
 
-    main.append(filtroContainer, containerPrincipal)
+        const cards = alunos.map(aluno => {
+            const card = criarCard(aluno)
+            card.addEventListener('click', () => carregarInfoAluno(aluno.id))
+            return card
+        })
+
+        const cardsContainer = criarCardsContainer(cards)
+        const filtroContainer = criarFiltrosContainer(filtrarAlunos, curso.id)
+        const containerPrincipal = criarContainerPrincipal(curso, cardsContainer)
+
+        main.append(filtroContainer, containerPrincipal)
+    } catch (error) {
+        console.error("Erro ao carregar tela: " + error)
+    }finally{
+        mudandoDeTela = false
+    }
 }
 
 async function carregarInfoAluno(alunoId) {
 
 }
 
+function telaCarregamento() {
+    let divLoadingContainer = document.createElement('div')
+    divLoadingContainer.className = "loading-container"
+
+    let imgLogoLoading = document.createElement('img')
+    imgLogoLoading.src = "./img/scudo-logo-image.svg"
+
+    let loading = document.createElement('div')
+    loading.className = "loading"
+
+    divLoadingContainer.append(imgLogoLoading, loading)
+    return divLoadingContainer
+}
 
 
 carregarTelaHome()
