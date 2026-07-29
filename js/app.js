@@ -1,6 +1,8 @@
-import { getCursos, getAlunosPorCurso, filtrarAlunosPorStatus } from './rotas.js'
+import { getCursos, getAlunosPorCurso, filtrarAlunosPorStatus, getAlunoID } from './rotas.js'
 import { criarBotoesCursos, criarCursoContainer, criarContainer } from './principal.js'
 import { criarFiltrosContainer, criarCard, criarContainerPrincipal, criarCardsContainer } from './tela_turma.js'
+
+import { criarBars, criarGraphContainer, criarInfoContainer } from './tela_info.js'
 
 const main = document.getElementById("main")
 
@@ -105,13 +107,57 @@ async function carregarTelaTurma(curso) {
         main.append(filtroContainer, containerPrincipal)
     } catch (error) {
         console.error("Erro ao carregar tela: " + error)
-    }finally{
+    } finally {
         mudandoDeTela = false
     }
 }
 
 async function carregarInfoAluno(alunoId) {
+    main.replaceChildren()
+    main.classList.remove("main-principal")
 
+    const buttonVoltar = document.querySelector(".voltar-sair")
+    buttonVoltar.children[1].textContent = "Voltar"
+
+
+
+
+    if (mudandoDeTela) {
+        return
+    }
+
+    mudandoDeTela = true
+    main.replaceChildren()
+    main.append(telaCarregamento())
+
+    try {
+        const aluno = await getAlunoID(alunoId)
+
+
+        buttonVoltar.onclick = () => {
+            carregarTelaTurma(aluno.curso_id)
+            buttonVoltar.children[1].textContent = "Sair"
+        }
+
+        main.replaceChildren()
+
+        const bars = aluno.desempenho.map(itemDesempenho => {
+            const bar = criarBars(itemDesempenho)
+            return bar
+        })
+
+
+        const graphContainer = criarGraphContainer(bars)
+        const infoContainer = criarInfoContainer(graphContainer)
+
+
+
+        main.append(infoContainer)
+    } catch (error) {
+        console.log(error);
+    } finally {
+        mudandoDeTela = false
+    }
 }
 
 function telaCarregamento() {
@@ -127,3 +173,15 @@ function telaCarregamento() {
     divLoadingContainer.append(imgLogoLoading, loading)
     return divLoadingContainer
 }
+
+function voltarTela(carregarTela) {
+    const buttonVoltar = document.querySelector(".voltar-sair")
+    buttonVoltar.children[1].textContent = "Voltar"
+
+    buttonVoltar.onclick = () => {
+        carregarTela()
+        buttonVoltar.children[1].textContent = "Sair"
+    }
+}
+
+carregarTelaHome()

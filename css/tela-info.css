@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 .info-container{
     height: 100%;
     width: 100%;
@@ -11,6 +13,9 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    text-shadow: 2px 4px 30px rgba(0, 0, 0, 0.5);
+    font-size: 1.9rem;
+    color: #3347B0;
 }
 
 .graph-container{
@@ -33,6 +38,52 @@
 
 .div-bar{
     height: 387px;
-    width: 2em;
-    background-color: gray;
+    width: 1em;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    color: #3347B0;
+    gap: 20px;
+}
+
+.bar{
+    height: 343px;
+    display: flex;
+    flex-direction: column-reverse;
+    background-color: #EEEFF8;
+}
+
+.bar-level{
+    height: 87%;
+    background-color:#3347B0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    box-shadow: 0px 4px 20px #3347B0;
+}
+
+.nota-boa{
+    background-color: #3347B0;
+}
+
+.number-boa{
+    color: #3347B0;
+}
+
+.nota-media{
+    background-color: #E5B657;
+}
+
+.number-media{
+    color: #E5B657;
+}
+
+.nota-ruim{
+    background-color: #C11010;
+}
+
+.number-ruim{
+    color: #C11010;
 }
