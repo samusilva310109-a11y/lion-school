@@ -1,7 +1,7 @@
 'use strict'
 
 function validarBarLevel(desempenhoAluno, barLevel) {
-    if (desempenhoAluno > 80) {
+    if (desempenhoAluno >= 80) {
         barLevel.classList.add("nota-boa")
     } else if (desempenhoAluno < 50) {
         barLevel.classList.add("nota-ruim")
@@ -11,7 +11,7 @@ function validarBarLevel(desempenhoAluno, barLevel) {
 }
 
 function validarSpanDesempenho(desempenhoAluno, spanDesempenho) {
-    if (desempenhoAluno > 60) {
+    if (desempenhoAluno >= 80) {
         spanDesempenho.classList.add("number-boa")
     } else if (desempenhoAluno < 50) {
         spanDesempenho.classList.add("number-ruim")
