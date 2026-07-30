@@ -108,13 +108,13 @@ export function criarCardsContainer(cards){
     return cardsContainer
 }
 
-export function criarContainerPrincipal(curso, cardsContainer) {
+export function criarContainerPrincipal(cursoNome, cardsContainer) {
     const divPrincipal = document.createElement('div')
     divPrincipal.className = "principal"
 
     const titulo = document.createElement('h1')
     titulo.className = ""
-    titulo.textContent = curso.nome
+    titulo.textContent = cursoNome
 
     divPrincipal.append(titulo, cardsContainer)
 

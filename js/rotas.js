@@ -11,6 +11,15 @@ export async function getCursos() {
     return response.json()
 }
 
+export async function getCursoPorID(idCurso) {
+    const response = await fetch(`${url}/cursos/${idCurso}`)
+
+    if(!response.ok)
+        throw new Error("Erro ao buscar o curso")
+
+    return response.json()
+}
+
 export async function getAlunos() {
     const response = await fetch(`${url}/alunos`)
 
@@ -44,7 +53,6 @@ export async function getAlunoID(idAluno) {
     if(!response.ok)
         throw new Error("Erro ao buscar aluno")
 
-    console.log(response);
     
     return response.json()
 }

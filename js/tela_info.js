@@ -1,7 +1,7 @@
 'use strict'
 
 function validarBarLevel(desempenhoAluno, barLevel) {
-    if (desempenhoAluno > 60) {
+    if (desempenhoAluno > 80) {
         barLevel.classList.add("nota-boa")
     } else if (desempenhoAluno < 50) {
         barLevel.classList.add("nota-ruim")
@@ -20,7 +20,7 @@ function validarSpanDesempenho(desempenhoAluno, spanDesempenho) {
     }
 }
 
-export function criarBars(desempenho) {
+function criarBars(desempenho) {
 
     const divBar = document.createElement('div')
     divBar.className = "div-bar"
@@ -47,20 +47,41 @@ export function criarBars(desempenho) {
 
 }
 
-export function criarGraphContainer(bars) {
+function criarGraphContainer(aluno) {
     const graphContainer = document.createElement('div')
     graphContainer.className = "graph-container"
+
+    const bars = aluno.desempenho.map(itemDesempenho => {
+        const bar = criarBars(itemDesempenho)
+        return bar
+    })
+
 
     graphContainer.append(...bars)
     return graphContainer
 }
 
-export function criarInfoContainer(graphContainer) {
+function criarFotoAlunoContainer(aluno) {
+    const fotoAlunoContainer = document.createElement('div')
+    fotoAlunoContainer.className = "foto-aluno-container"
+
+    const fotoAluno = document.createElement('img')
+    fotoAluno.src = aluno.foto
+
+    const nomeAluno = document.createElement('span')
+    nomeAluno.textContent = aluno.nome
+
+    fotoAlunoContainer.append(fotoAluno, nomeAluno)
+    return fotoAlunoContainer
+}
+
+export function criarInfoContainer(aluno) {
     const infoContainer = document.createElement('div')
     infoContainer.className = "info-container"
 
-    // const fotoAlunoContainer = criarFotoAlunoContainer()
+    const fotoAlunoContainer = criarFotoAlunoContainer(aluno)
+    const graphContainer = criarGraphContainer(aluno)
 
-    infoContainer.append(graphContainer)
+    infoContainer.append(fotoAlunoContainer, graphContainer)
     return infoContainer
 }

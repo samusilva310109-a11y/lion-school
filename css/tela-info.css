@@ -12,7 +12,9 @@
 .foto-aluno-container{
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-direction: column;
+    gap: 20px;
     text-shadow: 2px 4px 30px rgba(0, 0, 0, 0.5);
     font-size: 1.9rem;
     color: #3347B0;
@@ -34,6 +36,7 @@
 .foto-aluno-container > img{
     width: 400px;
     height: 400px;
+    border-radius: 50%;
 }
 
 .div-bar{
