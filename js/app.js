@@ -1,8 +1,8 @@
-import { getCursos, getAlunosPorCurso, filtrarAlunosPorStatus, getAlunoID } from './rotas.js'
+import { getCursos, getCursoPorID, getAlunosPorCurso, filtrarAlunosPorStatus, getAlunoID } from './rotas.js'
 import { criarBotoesCursos, criarCursoContainer, criarContainer } from './principal.js'
 import { criarFiltrosContainer, criarCard, criarContainerPrincipal, criarCardsContainer } from './tela_turma.js'
 
-import { criarBars, criarGraphContainer, criarInfoContainer } from './tela_info.js'
+import {criarInfoContainer } from './tela_info.js'
 
 const main = document.getElementById("main")
 
@@ -54,7 +54,7 @@ async function carregarTelaHome() {
         const botoes = cursos.map(curso => {
             const btn = criarBotoesCursos(curso)
 
-            btn.addEventListener('click', () => carregarTelaTurma(curso))
+            btn.addEventListener('click', () => carregarTelaTurma(curso.id, curso.nome))
 
             return btn
         })
@@ -70,7 +70,7 @@ async function carregarTelaHome() {
 
 }
 
-async function carregarTelaTurma(curso) {
+async function carregarTelaTurma(cursoId, cursoNome) {
     main.replaceChildren()
     main.classList.remove("main-principal")
 
@@ -91,7 +91,7 @@ async function carregarTelaTurma(curso) {
     main.append(telaCarregamento())
 
     try {
-        let alunos = await getAlunosPorCurso(curso.id)
+        let alunos = await getAlunosPorCurso(cursoId)
         main.replaceChildren()
 
         const cards = alunos.map(aluno => {
@@ -101,8 +101,8 @@ async function carregarTelaTurma(curso) {
         })
 
         const cardsContainer = criarCardsContainer(cards)
-        const filtroContainer = criarFiltrosContainer(filtrarAlunos, curso.id)
-        const containerPrincipal = criarContainerPrincipal(curso, cardsContainer)
+        const filtroContainer = criarFiltrosContainer(filtrarAlunos, cursoId)
+        const containerPrincipal = criarContainerPrincipal(cursoNome, cardsContainer)
 
         main.append(filtroContainer, containerPrincipal)
     } catch (error) {
@@ -121,7 +121,6 @@ async function carregarInfoAluno(alunoId) {
 
 
 
-
     if (mudandoDeTela) {
         return
     }
@@ -132,25 +131,17 @@ async function carregarInfoAluno(alunoId) {
 
     try {
         const aluno = await getAlunoID(alunoId)
-
+        const curso = await getCursoPorID(aluno.curso_id) 
 
         buttonVoltar.onclick = () => {
-            carregarTelaTurma(aluno.curso_id)
-            buttonVoltar.children[1].textContent = "Sair"
+            carregarTelaTurma(curso.id, curso.nome)
+            buttonVoltar.children[1].textContent = "Voltar"
         }
 
         main.replaceChildren()
 
-        const bars = aluno.desempenho.map(itemDesempenho => {
-            const bar = criarBars(itemDesempenho)
-            return bar
-        })
-
-
-        const graphContainer = criarGraphContainer(bars)
-        const infoContainer = criarInfoContainer(graphContainer)
-
-
+        
+        const infoContainer = criarInfoContainer(aluno)
 
         main.append(infoContainer)
     } catch (error) {
@@ -172,16 +163,6 @@ function telaCarregamento() {
 
     divLoadingContainer.append(imgLogoLoading, loading)
     return divLoadingContainer
-}
-
-function voltarTela(carregarTela) {
-    const buttonVoltar = document.querySelector(".voltar-sair")
-    buttonVoltar.children[1].textContent = "Voltar"
-
-    buttonVoltar.onclick = () => {
-        carregarTela()
-        buttonVoltar.children[1].textContent = "Sair"
-    }
 }
 
 carregarTelaHome()
